@@ -39,4 +39,3 @@ corals %>%
 get_dupes(corals, change_mg_cm2) #not sure what this has done, 
                                  #but it's supposed to show duplicate data
                                  #don't think this dataset has any
-
