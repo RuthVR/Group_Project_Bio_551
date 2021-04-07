@@ -35,12 +35,11 @@ library(here)
 
 ### The main functions are:
 
--  clean_names()
--  tabyl()
--  remove_empty()
--  get_dupes()
--  excel_numeric_to_date()
-
+-  clean_names()     ---> Shane
+-  tabyl()           ---> Shane
+-  remove_empty()    ---> Amanda
+-  get_dupes()       ---> Ruth
+-  excel_numeric_to_date()  ----> Kevin
 
 ### clean_names()
 
