@@ -16,6 +16,12 @@ view(coralgrowth) #FYI I renamed the file to be shorter
 coralsclean<-coralgrowth[,-c(5:14)] #get rid of the analysis on Excel
 view(coralsclean)
 
+#let's make the example more clear by renaming col's inconsistently
+coralsclean %>%
+rename(Treatment..ÂºC = ï..Treatment..ÂºC.)%>%
+rename(final_mg_cm2 = Final..mg.cm2.) %>%
+rename(change_Mg.Cm2 = Change..mg.cm2.)
+
 #make initial corals table
 coralsclean %>%
   kbl() %>%
@@ -34,7 +40,7 @@ excel_numeric_to_date() #note we have no date data
 corals<-clean_names(coralgrowth)
 view(corals) #this works, formats the names similarly
 
-#make new corals table to see before and after
+#make new corals table to see before and after difference
 corals %>%
   kbl() %>%
   kable_classic() 
