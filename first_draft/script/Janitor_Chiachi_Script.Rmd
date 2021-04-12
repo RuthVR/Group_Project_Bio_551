@@ -1,0 +1,67 @@
+---
+title: "Group Project Notes"
+author: "Amanda Chiachi"
+date: "3/31/2021"
+output: 
+  html_document:
+    toc: TRUE
+    toc_float: TRUE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+For our project we will be presenting the package **"Janitor"**
+
+
+# Install the Following Package
+
+**install.packages("janitor")**
+
+
+# Load Libraries
+```{r, message=FALSE}
+library(janitor)
+library(tidyverse)
+library(here)
+```
+
+#available functions
+clean_names()
+tabyl()
+remove_empty() #note we have no empty cells
+get_dupes()
+excel_numeric_to_date() #note we have no date data
+
+# Notes about Package
+### The main functions are:
+
+-  clean_names() # Shane
+-  tabyl() # Shane 
+-  remove_empty() # Amanda 
+-  get_dupes() # Ruth 
+-  excel_numeric_to_date() # Kevin 
+
+#Cleaning Data
+- How to use remove_empty  
+```{r}
+a <- data.frame(v1 = c(7, NA, 4, NA),
+                v2 = c(6, NA, 8, 7),
+                v3 = c("a", NA, "b", NA), 
+                v4 = c(NA, NA, NA, NA))
+view(a)
+a %>%
+  remove_empty(c("rows", "cols"))
+```
+#bring in data
+```{r}
+here()
+SGD_Samples<-read_csv("first_draft/Data/SGD_Time_Series_Samples.csv")
+view(SGD_Samples)
+SGD_Samples%>%
+```
+
+
