@@ -25,6 +25,7 @@ For our project we will be presenting the package **"Janitor"**
 library(janitor)
 library(tidyverse)
 library(here)
+library(kableExtra)
 ```
 
 
@@ -46,15 +47,28 @@ a <- data.frame(v1 = c(7, 6, 4, 5),
                 v4 = c(6, 5, 8, 10))
 view(a)
 a %>%
-  remove_empty(c("rows", "cols"))
+  kbl()%>%
+  kable_classic()
+
+a_clean<-a %>%
+  remove_empty(c("rows", "cols")) 
+
+a_clean%>%  
+kbl() %>%
+  kable_classic()
 ```
-#bring in data
+#Usefullness on a real data set 
 ```{r}
 coralgrowth<-read_csv(here("first_draft/data/CoralGrowth.csv"))
-view(coralgrowth) 
+coralgrowth %>%
+  kbl() %>%
+  kable_classic() 
+
 coralgrowth_clean<-coralgrowth%>%  
   remove_empty(c("rows", "cols"))
-view(coralgrowth_clean)
+coralgrowth_clean %>%
+  kbl()%>%
+  kable_classic()
 ```
 
 
