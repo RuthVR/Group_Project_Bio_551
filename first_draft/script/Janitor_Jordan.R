@@ -16,7 +16,7 @@ view(coralgrowth) #FYI I renamed the file to be shorter
 coralsclean<-coralgrowth[,-c(5:14)] #get rid of the analysis on Excel
 view(coralsclean)
 
-#let's make the example more clear by renaming col's inconsistently
+#let's make the example more clear by renaming col's to be inconsistent
 coralsclean %>%
 rename(Treatment..ÂºC = ï..Treatment..ÂºC.)%>%
 rename(final_mg_cm2 = Final..mg.cm2.) %>%
