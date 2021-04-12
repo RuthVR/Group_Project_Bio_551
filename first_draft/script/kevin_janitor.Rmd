@@ -17,10 +17,30 @@ knitr::opts_chunk$set(echo = TRUE)
 library(janitor)
 library(here)
 ```
+# Data Before the Janitor Function
+| Date  | Session | Topic    |
+|:------|:-------:|---------:|
+| _left_ | _center_| _right_ |
+|   41104| 1       | Anatomy |
+|41105   |         | *Break* |
+| 41106  | 2       | Tables  |
+| 41107  |         | *Break* |
 
 # Function: *excel_numeric_to_date()* 
 In the event when we load data straight from excel, R tends to change the date to a series of numbers. This function decodes that for example:
 ```{r}
-excel_numeric_to_date(41103)
+excel_numeric_to_date(41104)
+excel_numeric_to_date(41105)
+excel_numeric_to_date(41106)
+excel_numeric_to_date(41107)
 ```
-every set of numbers can be decoded to a certain day, 
+every set of numbers can be decoded to a certain day,
+
+# Data After the Janitor Function
+| Date     | Session | Topic    |
+|:---------|:-------:|---------:|
+| _left_   | _center_| _right_ |
+|2012-07-14| 1       | Anatomy |
+|2012-07-15|         | *Break* |
+|2012-07-16| 2       | Tables  |
+|2012-07-17|         | *Break* |

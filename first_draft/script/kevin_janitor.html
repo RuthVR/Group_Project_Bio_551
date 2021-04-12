@@ -283,12 +283,96 @@ div.tocify {
 <pre class="r"><code>library(here)</code></pre>
 <pre><code>## here() starts at C:/Users/kayey/Documents/R/Group_Project_Bio_551</code></pre>
 </div>
+<div id="data-before-the-janitor-function" class="section level1">
+<h1>Data Before the Janitor Function</h1>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Date</th>
+<th align="center">Session</th>
+<th align="right">Topic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><em>left</em></td>
+<td align="center"><em>center</em></td>
+<td align="right"><em>right</em></td>
+</tr>
+<tr class="even">
+<td align="left">41104</td>
+<td align="center">1</td>
+<td align="right">Anatomy</td>
+</tr>
+<tr class="odd">
+<td align="left">41105</td>
+<td align="center"></td>
+<td align="right"><em>Break</em></td>
+</tr>
+<tr class="even">
+<td align="left">41106</td>
+<td align="center">2</td>
+<td align="right">Tables</td>
+</tr>
+<tr class="odd">
+<td align="left">41107</td>
+<td align="center"></td>
+<td align="right"><em>Break</em></td>
+</tr>
+</tbody>
+</table>
+</div>
 <div id="function-excel_numeric_to_date" class="section level1">
 <h1>Function: <em>excel_numeric_to_date()</em></h1>
 <p>In the event when we load data straight from excel, R tends to change the date to a series of numbers. This function decodes that for example:</p>
-<pre class="r"><code>excel_numeric_to_date(41103)</code></pre>
-<pre><code>## [1] &quot;2012-07-13&quot;</code></pre>
+<pre class="r"><code>excel_numeric_to_date(41104)</code></pre>
+<pre><code>## [1] &quot;2012-07-14&quot;</code></pre>
+<pre class="r"><code>excel_numeric_to_date(41105)</code></pre>
+<pre><code>## [1] &quot;2012-07-15&quot;</code></pre>
+<pre class="r"><code>excel_numeric_to_date(41106)</code></pre>
+<pre><code>## [1] &quot;2012-07-16&quot;</code></pre>
+<pre class="r"><code>excel_numeric_to_date(41107)</code></pre>
+<pre><code>## [1] &quot;2012-07-17&quot;</code></pre>
 <p>every set of numbers can be decoded to a certain day,</p>
+</div>
+<div id="data-before-the-janitor-function-1" class="section level1">
+<h1>Data Before the Janitor Function</h1>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Date</th>
+<th align="center">Session</th>
+<th align="right">Topic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><em>left</em></td>
+<td align="center"><em>center</em></td>
+<td align="right"><em>right</em></td>
+</tr>
+<tr class="even">
+<td align="left">2012-07-14</td>
+<td align="center">1</td>
+<td align="right">Anatomy</td>
+</tr>
+<tr class="odd">
+<td align="left">2012-07-15</td>
+<td align="center"></td>
+<td align="right"><em>Break</em></td>
+</tr>
+<tr class="even">
+<td align="left">2012-07-16</td>
+<td align="center">2</td>
+<td align="right">Tables</td>
+</tr>
+<tr class="odd">
+<td align="left">2012-07-17</td>
+<td align="center"></td>
+<td align="right"><em>Break</em></td>
+</tr>
+</tbody>
+</table>
 </div>
 
 
