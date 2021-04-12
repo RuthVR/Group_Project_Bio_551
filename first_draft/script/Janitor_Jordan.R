@@ -34,10 +34,10 @@ excel_numeric_to_date() #note we have no date data
 corals<-clean_names(coralgrowth)
 view(corals) #this works, formats the names similarly
 
-#make new corals table
+#make new corals table to see before and after
 corals %>%
   kbl() %>%
-  kable_classic()
+  kable_classic() 
 
 #tabyl
 coralstable <- tabyl(corals, change_mg_cm2) #we can put the above object into a frequency table
