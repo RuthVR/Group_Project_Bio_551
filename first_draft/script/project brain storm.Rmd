@@ -27,12 +27,28 @@ For our project we will be presenting the package **"Janitor"**
 library(janitor)
 library(tidyverse)
 library(here)
+library(readxl)
 ```
 
 
-# About Package
+# Please load the following data:
 
-The main functions in this package are:
+This is the data that we will be using to explain the different fuctions that are going to be presented. 
+
+```{r}
+coralgrowth<-read_csv(here("first_draft/data/CoralGrowth.csv"))
+view(coralgrowth) 
+
+#a little data wrangling
+coralsclean<-coralgrowth[,-c(5:14)] #get rid of the analysis on Excel
+view(coralsclean)
+
+```
+
+
+# About the Package
+
+There are many functions in this package, but we will only be going over the top five important functions. The package helps users clean up the data, so that it can be easier to use for analysis. 
 
 -  clean_names()     ---> Shane
 -  tabyl()           ---> Shane
@@ -43,4 +59,57 @@ The main functions in this package are:
 
 ### clean_names()
 
-This function 
+Using the **clean_names()** function
+```{r}
+corals<-clean_names(coralgrowth)
+view(corals) #this works, formats the names similarly
+
+```
+
+### tably() 
+
+Using the **tabyl()** function will 
+```{r}
+tabyl(corals, change_mg_cm2) #we can put the above object into a frequency table
+
+# How we can use the function with a pipe
+corals %>%
+  tabyl(change_mg_cm2)
+
+```
+
+
+### excel_numeric_to_date()
+
+In the event when we load data straight from excel, R tends to change the date to a series of numbers. This function decodes that for example:
+
+## **Data Before the Janitor Function**
+| Date  | Session | Topic    |
+|:------|:-------:|---------:|
+| _left_ | _center_| _right_ |
+|   41104| 1       | Anatomy |
+|41105   |         | *Break* |
+| 41106  | 2       | Tables  |
+| 41107  |         | *Break* |
+
+**How we use the Function: *excel_numeric_to_date()* **
+
+In the event when we load data straight from excel, R tends to change the date to a series of numbers. This function decodes that for example:
+```{r}
+excel_numeric_to_date(41104)
+excel_numeric_to_date(41105)
+excel_numeric_to_date(41106)
+excel_numeric_to_date(41107)
+```
+every set of numbers can be decoded to a certain day,
+
+## Data After the Janitor Function
+| Date     | Session | Topic    |
+|:---------|:-------:|---------:|
+| _left_   | _center_| _right_ |
+|2012-07-14| 1       | Anatomy |
+|2012-07-15|         | *Break* |
+|2012-07-16| 2       | Tables  |
+|2012-07-17|         | *Break* |
+
+
