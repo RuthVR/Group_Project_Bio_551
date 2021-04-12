@@ -1,0 +1,26 @@
+---
+title: "Kevin the RStudio Janitor"
+author: "Kevin Candray"
+date: "4/7/2021"
+output: 
+  html_document:
+    toc: TRUE
+    toc_float: TRUE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Loading packages
+```{r}
+library(janitor)
+library(here)
+```
+
+# Function: *excel_numeric_to_date()* 
+In the event when we load data straight from excel, R tends to change the date to a series of numbers. This function decodes that for example:
+```{r}
+excel_numeric_to_date(41103)
+```
+every set of numbers can be decoded to a certain day, 
