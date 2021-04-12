@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Introduction
 
-For our project we will be presenting the package **"Janitor"**
+For our project we will be presenting the package called  **"Janitor"**
 
 
 # Install the Following Package
@@ -30,7 +30,7 @@ library(here)
 ```
 
 
-# Notes about Package
+# About the Package
 
 
 ### The main functions are:
@@ -41,6 +41,8 @@ library(here)
 -  get_dupes() # Ruth 
 -  excel_numeric_to_date() # Kevin 
 
-### clean_names()
+##### clean_names()
 
-This function 
+This function....
+
+

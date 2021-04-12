@@ -1,11 +1,10 @@
 ---
 title: "Group Project Notes"
-author: "Ruth Vergara Reyes"
+author: "Amanda Chiachi, Kevin Candray, Shane Jordan, and Ruth Vergara Reyes"
 date: "3/31/2021"
 output: 
-  html_document:
-    toc: TRUE
-    toc_float: TRUE
+   prettydoc::html_pretty:
+    theme: hpstr
 ---
 
 ```{r setup, include=FALSE}
@@ -17,12 +16,13 @@ knitr::opts_chunk$set(echo = TRUE)
 For our project we will be presenting the package **"Janitor"**
 
 
-# Install the Following Package
+# Please Install the Following Package
 
 **install.packages("janitor")**
 
 
 # Load Libraries
+
 ```{r, message=FALSE}
 library(janitor)
 library(tidyverse)
@@ -30,16 +30,16 @@ library(here)
 ```
 
 
-# Notes about Package
+# About Package
 
-
-### The main functions are:
+The main functions in this package are:
 
 -  clean_names()     ---> Shane
 -  tabyl()           ---> Shane
 -  remove_empty()    ---> Amanda
 -  get_dupes()       ---> Ruth
 -  excel_numeric_to_date()  ----> Kevin
+
 
 ### clean_names()
 
