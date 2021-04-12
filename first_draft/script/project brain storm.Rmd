@@ -28,6 +28,7 @@ library(janitor)
 library(tidyverse)
 library(here)
 library(readxl)
+library(kableExtra)
 ```
 
 
@@ -38,10 +39,6 @@ This is the data that we will be using to explain the different fuctions that ar
 ```{r}
 coralgrowth<-read_csv(here("first_draft/data/CoralGrowth.csv"))
 view(coralgrowth) 
-
-#a little data wrangling
-coralsclean<-coralgrowth[,-c(5:14)] #get rid of the analysis on Excel
-view(coralsclean)
 
 ```
 
@@ -59,10 +56,25 @@ There are many functions in this package, but we will only be going over the top
 
 ### clean_names()
 
-Using the **clean_names()** function
+Using the **clean_names()** function will change the format of the column names. 
+  This is how the data looked before.
+```{r, message=TRUE}
+
+coralsclean<-coralgrowth[,-c(5:14)] #get rid of the analysis on Excel
+
+coralsclean %>%
+  kbl() %>%
+  kable_classic()
+```
+
+  THis is the data set after
+
 ```{r}
-corals<-clean_names(coralgrowth)
-view(corals) #this works, formats the names similarly
+corals<-clean_names(coralsclean)
+
+corals %>%
+  kbl() %>%
+  kable_classic() 
 
 ```
 
