@@ -262,7 +262,8 @@ div.tocify {
 <pre class="r"><code>library(janitor)
 library(tidyverse)
 library(here)
-library(kableExtra)</code></pre>
+library(kableExtra)
+library(dplyr)</code></pre>
 </div>
 <div id="notes-about-package" class="section level1">
 <h1>Notes about Package</h1>
@@ -276,20 +277,165 @@ library(kableExtra)</code></pre>
 <li>excel_numeric_to_date() # Kevin</li>
 </ul>
 <p>#Cleaning Data - How to use remove_empty</p>
-<pre class="r"><code>a &lt;- data.frame(v1 = c(7, 6, 4, 5),
+<pre class="r"><code>#first make a simple data frame 
+a &lt;- data.frame(v1 = c(7, 6, 4, 5),
                 v2 = c(NA, NA, NA, NA),
                 v3 = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;), 
                 v4 = c(6, 5, 8, 10))
-view(a)
-a %&gt;%
-  remove_empty(c(&quot;rows&quot;, &quot;cols&quot;))</code></pre>
-<pre><code>##   v1 v3 v4
-## 1  7  a  6
-## 2  6  b  5
-## 3  4  c  8
-## 4  5  d 10</code></pre>
-<p>#use on a real data set</p>
-<pre class="r"><code>coralgrowth&lt;-read_csv(here(&quot;first_draft/data/CoralGrowth.csv&quot;))</code></pre>
+a %&gt;% #data frame name
+  kbl()%&gt;% #make a table in RMarkdown
+  kable_classic()%&gt;%
+    kable_styling(full_width = FALSE, position = &quot;left&quot;)#classic theme</code></pre>
+<table class=" lightable-classic table" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto; width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:right;">
+v1
+</th>
+<th style="text-align:left;">
+v2
+</th>
+<th style="text-align:left;">
+v3
+</th>
+<th style="text-align:right;">
+v4
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+a
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+b
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+c
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+d
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>a_clean&lt;-a %&gt;% #rename data frame
+  remove_empty(c(&quot;rows&quot;, &quot;cols&quot;)) #checks for empty columns and rows, removes them!
+
+a_clean%&gt;%  #data frame name 
+  kbl()%&gt;% #make a table in RMarkdown
+  kable_classic()%&gt;%
+  kable_styling(full_width = FALSE, position = &quot;left&quot;)</code></pre>
+<table class=" lightable-classic table" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto; width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:right;">
+v1
+</th>
+<th style="text-align:left;">
+v3
+</th>
+<th style="text-align:right;">
+v4
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:left;">
+a
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+b
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+c
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+d
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>  #classic theme</code></pre>
+</div>
+</div>
+<div id="usefullness-on-a-real-data-set" class="section level1">
+<h1>Usefullness on a real data set</h1>
+<pre class="r"><code>coralgrowth&lt;-read_csv(here(&quot;first_draft/data/CoralGrowth.csv&quot;)) #bring in the data</code></pre>
 <pre><code>## Warning: Missing column names filled in: &#39;X5&#39; [5], &#39;X6&#39; [6]</code></pre>
 <pre><code>## Parsed with column specification:
 ## cols(
@@ -312,52 +458,55 @@ a %&gt;%
 ##   `Mean + SE` = col_double(),
 ##   `Mean - SE` = col_double()
 ## )</code></pre>
-<pre class="r"><code>coralgrowth %&gt;%
-  kbl() %&gt;%
-  kable_classic() </code></pre>
-<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+<pre class="r"><code>coralgrowth %&gt;% # data frame name
+  kbl() %&gt;% # make a table in RMarkdown
+  kable_classic()%&gt;%
+    kable_styling() %&gt;%
+    scroll_box(width = &quot;700px&quot;, height = &quot;300px&quot;)# classic theme</code></pre>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:700px; ">
+<table class=" lightable-classic table" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
-<th style="text-align:left;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
 Treatment (ºC)
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 Initial (mg/cm2)
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 Final (mg/cm2)
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 Change (mg/cm2)
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 X5
 </th>
-<th style="text-align:left;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
 X6
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 Treatment
 </th>
-<th style="text-align:left;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
 Temperature (ºC)
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 Mean
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 Standard Deviation
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 Sample Size
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 Standard Error
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 Mean + SE
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 Mean - SE
 </th>
 </tr>
@@ -2169,51 +2318,55 @@ NA
 </tr>
 </tbody>
 </table>
-<pre class="r"><code>coralgrowth_clean&lt;-coralgrowth%&gt;%  
-  remove_empty(c(&quot;rows&quot;, &quot;cols&quot;))
-coralgrowth_clean %&gt;%
-  kbl()%&gt;%
-  kable_classic()</code></pre>
-<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+</div>
+<pre class="r"><code>coralgrowth_clean&lt;-coralgrowth%&gt;%  #rename data set
+  remove_empty(c(&quot;rows&quot;, &quot;cols&quot;)) #remove any rows or columns with all NAs
+coralgrowth_clean %&gt;% # data frame name
+  kbl()%&gt;% #make a table in RMarkdown
+  kable_classic() %&gt;%
+    kable_styling() %&gt;%
+    scroll_box(width = &quot;700px&quot;, height = &quot;300px&quot;)</code></pre>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:700px; ">
+<table class=" lightable-classic table" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
-<th style="text-align:left;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
 Treatment (ºC)
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 Initial (mg/cm2)
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 Final (mg/cm2)
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 Change (mg/cm2)
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 X5
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 Treatment
 </th>
-<th style="text-align:left;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
 Temperature (ºC)
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 Mean
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 Standard Deviation
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 Sample Size
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 Standard Error
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 Mean + SE
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 Mean - SE
 </th>
 </tr>
