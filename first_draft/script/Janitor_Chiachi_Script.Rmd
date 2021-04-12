@@ -16,11 +16,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 For our project we will be presenting the package **"Janitor"**
 
-
 # Install the Following Package
 
 **install.packages("janitor")**
-
 
 # Load Libraries
 ```{r, message=FALSE}
@@ -29,12 +27,6 @@ library(tidyverse)
 library(here)
 ```
 
-#available functions
-clean_names()
-tabyl()
-remove_empty() #note we have no empty cells
-get_dupes()
-excel_numeric_to_date() #note we have no date data
 
 # Notes about Package
 ### The main functions are:
@@ -48,20 +40,21 @@ excel_numeric_to_date() #note we have no date data
 #Cleaning Data
 - How to use remove_empty  
 ```{r}
-a <- data.frame(v1 = c(7, NA, 4, NA),
-                v2 = c(6, NA, 8, 7),
-                v3 = c("a", NA, "b", NA), 
-                v4 = c(NA, NA, NA, NA))
+a <- data.frame(v1 = c(7, 6, 4, 5),
+                v2 = c(NA, NA, NA, NA),
+                v3 = c("a", "b", "c", "d"), 
+                v4 = c(6, 5, 8, 10))
 view(a)
 a %>%
   remove_empty(c("rows", "cols"))
 ```
 #bring in data
 ```{r}
-here()
-SGD_Samples<-read_csv("first_draft/Data/SGD_Time_Series_Samples.csv")
-view(SGD_Samples)
-SGD_Samples%>%
+coralgrowth<-read_csv(here("first_draft/data/CoralGrowth.csv"))
+view(coralgrowth) 
+coralgrowth_clean<-coralgrowth%>%  
+  remove_empty(c("rows", "cols"))
+view(coralgrowth_clean)
 ```
 
 
