@@ -29,10 +29,14 @@ library(tidyverse)
 library(here)
 ```
 
+#available functions
+clean_names()
+tabyl()
+remove_empty() #note we have no empty cells
+get_dupes()
+excel_numeric_to_date() #note we have no date data
 
 # Notes about Package
-
-
 ### The main functions are:
 
 -  clean_names() # Shane
@@ -41,6 +45,23 @@ library(here)
 -  get_dupes() # Ruth 
 -  excel_numeric_to_date() # Kevin 
 
-### clean_names()
+#Cleaning Data
+- How to use remove_empty  
+```{r}
+a <- data.frame(v1 = c(7, NA, 4, NA),
+                v2 = c(6, NA, 8, 7),
+                v3 = c("a", NA, "b", NA), 
+                v4 = c(NA, NA, NA, NA))
+view(a)
+a %>%
+  remove_empty(c("rows", "cols"))
+```
+#bring in data
+```{r}
+here()
+SGD_Samples<-read_csv("first_draft/Data/SGD_Time_Series_Samples.csv")
+view(SGD_Samples)
+SGD_Samples%>%
+```
 
-This function 
+
