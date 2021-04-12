@@ -17,10 +17,13 @@ coralsclean<-coralgrowth[,-c(5:14)] #get rid of the analysis on Excel
 view(coralsclean)
 
 #let's make the example more clear by renaming col's to be inconsistent
-coralsclean %>%
+coraldata <- coralsclean %>%
 rename(Treatment..ÂºC = ï..Treatment..ÂºC.)%>%
 rename(final_mg_cm2 = Final..mg.cm2.) %>%
 rename(change_Mg.Cm2 = Change..mg.cm2.)
+
+coraldata%>%
+write_csv(here("first_draft","data","coraldata.csv"))
 
 #make initial corals table
 coralsclean %>%
