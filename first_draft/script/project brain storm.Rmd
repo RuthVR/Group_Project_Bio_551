@@ -68,8 +68,8 @@ For example, in this data set we can see that all the column names have differen
 corals_messy%>%
   kbl() %>% # make a table in RMarkdown
   kable_classic()%>% #  Theme of the table
-    kable_styling() %>% 
-    scroll_box(width = "700px", height = "300px")# Table dimensions
+  kable_styling() %>% 
+  scroll_box(width = "700px", height = "300px")# Table dimensions
 ```
 
 
@@ -146,8 +146,8 @@ coralgrowth<-read_csv(here("first_draft/data/CoralGrowth.csv")) #bring in the da
 coralgrowth %>% # data frame name
   kbl() %>% # make a table in RMarkdown
   kable_classic()%>%
-    kable_styling() %>%
-    scroll_box(width = "700px", height = "300px")# classic theme
+  kable_styling() %>%
+  scroll_box(width = "700px", height = "300px")# classic theme
 ```
 
 What we did was remove the column **X6** due to it being all NA's. 
@@ -157,8 +157,8 @@ coralgrowth_clean<-coralgrowth%>%  #rename data set
 coralgrowth_clean %>% # data frame name
   kbl() %>% # make a table in RMarkdown
   kable_classic()%>%
-    kable_styling() %>%
-    scroll_box(width = "700px", height = "300px")# classic theme
+  kable_styling() %>%
+  scroll_box(width = "700px", height = "300px")# classic theme
 ```
 
 
@@ -213,11 +213,3 @@ every set of numbers can be decoded to a certain day,
 |2012-07-15|         | *Break* |
 |2012-07-16| 2       | Tables  |
 |2012-07-17|         | *Break* |
-
-
-
-
-
-
-
-
