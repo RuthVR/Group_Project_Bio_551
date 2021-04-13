@@ -1,5 +1,5 @@
 ---
-title: "Group Project Notes"
+title: "Janitor Package"
 author: "Amanda Chiachi, Kevin Candray, Shane Jordan, and Ruth Vergara Reyes"
 date: "3/31/2021"
 output: 
@@ -8,17 +8,19 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE,
+                      warning = FALSE,
+                      message = FALSE)
 ```
 
 # Introduction
 
-For our project we will be presenting the package **"Janitor"**
+For our project we will be presenting the package called **"Janitor."**
 
 
 # Please Install the Following Package
 
-**install.packages("janitor")**
+*install.packages("janitor")*
 
 
 # Load Libraries
@@ -34,68 +36,156 @@ library(kableExtra)
 
 # Please load the following data:
 
-This is the data that we will be using to explain the different fuctions that are going to be presented. 
+This is the data that we will be using to explain the different functions that are going to be presented. 
 
 ```{r}
 coralgrowth<-read_csv(here("first_draft/data/CoralGrowth.csv"))
-view(coralgrowth) 
+
+corals_messy <- read_csv(here("first_draft", "data", "coraldata.csv"))
 
 ```
 
-
 # About the Package
 
-There are many functions in this package, but we will only be going over the top five important functions. The package helps users clean up the data, so that it can be easier to use for analysis. 
+There are many functions in this package that helps users clean up the data, so that it can be easier to use for data analysis and plot making. We will only be going over 5 of the most useful functons in the package.
 
--  clean_names()     ---> Shane
--  tabyl()           ---> Shane
--  remove_empty()    ---> Amanda
--  get_dupes()       ---> Ruth
--  excel_numeric_to_date()  ----> Kevin
+-  clean_names()     
+-  tabyl()           
+-  remove_empty()
+-  get_dupes()      
+-  excel_numeric_to_date()
 
 
 ### clean_names()
 
-Using the **clean_names()** function will change the format of the column names. 
-  This is how the data looked before.
+Ever have a time when the names of the columns in the data that you are using are all in different formats and it just looks like a mess?
+Using the ***clean_names()*** function can help you with that, because it will change all of the column names so that they all have the same format. It will change all the names into lowercase letters with a _ as a separator.  
+
+For example, in this data set we can see that all the column names have different formats. Some use a . as a separator, others use a _ 
+
 ```{r, message=TRUE}
 
-coralsclean<-coralgrowth[,-c(5:14)] #get rid of the analysis on Excel
-
-coralsclean %>%
-  kbl() %>%
-  kable_classic()
+corals_messy%>%
+  kbl() %>% # make a table in RMarkdown
+  kable_classic()%>% #  Theme of the table
+    kable_styling() %>% 
+    scroll_box(width = "700px", height = "300px")# Table dimensions
 ```
 
-  THis is the data set after
+
+To save you time and lines of code, you can just use the function     **clean_names()**. This will lead to the column names all to become lowercase and the separator is now a _
 
 ```{r}
-corals<-clean_names(coralsclean)
+corals<-clean_names(corals_messy) ## function we are looking at ##
 
 corals %>%
-  kbl() %>%
-  kable_classic() 
-
+  kbl() %>% # make a table in RMarkdown
+  kable_classic()%>% # the theme of the table
+    kable_styling() %>%
+    scroll_box(width = "700px", height = "300px") # table dimensions 
 ```
+
+
 
 ### tably() 
 
-Using the **tabyl()** function will 
-```{r}
-tabyl(corals, change_mg_cm2) #we can put the above object into a frequency table
+To save you time and lines of code doing summary after summary use the **tabyl()** function. It will tell you the number of items of a value that you have, and their frequency. It essentially counts the number of times a character (you select)shows up and calculates the percentage that it makes up. The new values will show up as new columns. This function can be used in two ways... 
 
-# How we can use the function with a pipe
-corals %>%
-  tabyl(change_mg_cm2)
+The first being a vector
+```{r}
+tabyl(corals, change_mg_cm2)%>% #we can put the object into a frequency table
+  kbl() %>% # make a table in RMarkdown
+  kable_classic()%>% # theme of the table
+  kable_styling() %>% 
+  scroll_box(width = "300px", height = "300px")# table dimensions
 
 ```
+
+To save us some time we can do the second method, which is using it as a function within a pipe.
+```{r}
+corals %>%
+  tabyl(change_mg_cm2)%>%  ### The pipe version ###
+  kbl() %>% # make a table in RMarkdown
+  kable_classic()%>% # theme of table
+  kable_styling() %>%
+  scroll_box(width = "300px", height = "300px")# table dimensions
+
+```
+
+
+
+### remove_empty()
+
+#### Steps to follow when using *remove_empty* 
+
+```{r}
+#first make a simple data frame 
+a <- data.frame(v1 = c(7, 6, 4, 5),
+                v2 = c(NA, NA, NA, NA),
+                v3 = c("a", "b", "c", "d"), 
+                v4 = c(6, 5, 8, 10))
+a %>% #data frame name
+  kbl()%>% #make a table in RMarkdown
+  kable_classic()%>% #classic theme
+  kable_styling(full_width = FALSE, position = "left")
+
+
+a_clean<-a %>% #rename data frame
+  remove_empty(c("rows", "cols")) #checks for empty columns and rows, removes them!
+
+a_clean%>%  #data frame name 
+  kbl()%>% #make a table in RMarkdown
+  kable_classic()%>% #classic theme
+  kable_styling(full_width = FALSE, position = "left")
+
+```
+
+#### Usefullness on a real data set 
+```{r, message=FALSE}
+coralgrowth<-read_csv(here("first_draft/data/CoralGrowth.csv")) #bring in the data
+coralgrowth %>% # data frame name
+  kbl() %>% # make a table in RMarkdown
+  kable_classic()%>%
+    kable_styling() %>%
+    scroll_box(width = "700px", height = "300px")# classic theme
+```
+
+What we did was remove the column **X6** due to it being all NA's. 
+```{r}
+coralgrowth_clean<-coralgrowth%>%  #rename data set
+  remove_empty(c("rows", "cols")) #remove any rows or columns with all NAs
+coralgrowth_clean %>% # data frame name
+  kbl() %>% # make a table in RMarkdown
+  kable_classic()%>%
+    kable_styling() %>%
+    scroll_box(width = "700px", height = "300px")# classic theme
+```
+
+
+
+### get_dupes()
+
+When we want to make ensure that there are no duplicates within our data the function to use is **get_dupes()**. The function counts the amount of duplicates there are, and shows us the row that the dupicate is in. 
+
+```{r}
+corals %>%
+  get_dupes("change_mg_cm2")%>%  ## the function we are using ##
+  arrange(dupe_count)%>%  # arranged it by dupe count to make it organized 
+  kbl() %>% # make a table in RMarkdown
+  kable_classic()%>% # table theme
+  kable_styling() %>%
+  scroll_box(width = "700px", height = "300px")# table dimensions 
+```
+
+This can be useful in many ways. We might be able to see that we recorded the same data twice. We can look for any data changes are the same and then see if they were treated the same. Potentially, showing us that two different treatments lead to the same results. 
+
 
 
 ### excel_numeric_to_date()
 
 In the event when we load data straight from excel, R tends to change the date to a series of numbers. This function decodes that for example:
 
-## **Data Before the Janitor Function**
+#### **Data Before the Janitor Function**
 | Date  | Session | Topic    |
 |:------|:-------:|---------:|
 | _left_ | _center_| _right_ |
@@ -115,7 +205,7 @@ excel_numeric_to_date(41107)
 ```
 every set of numbers can be decoded to a certain day,
 
-## Data After the Janitor Function
+#### Data After the Janitor Function
 | Date     | Session | Topic    |
 |:---------|:-------:|---------:|
 | _left_   | _center_| _right_ |
@@ -123,5 +213,11 @@ every set of numbers can be decoded to a certain day,
 |2012-07-15|         | *Break* |
 |2012-07-16| 2       | Tables  |
 |2012-07-17|         | *Break* |
+
+
+
+
+
+
 
 
